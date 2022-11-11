@@ -4,113 +4,76 @@ import java.util.List;
 
 class Board implements Ilayout, Cloneable {
 
-    private static final int dim = 3;
-    private int board[][];
-    private int zeroI;
-    private int zeroJ;
+    private static int dim;
+    private int board[];
 
-    public Board() {
-        board = new int[dim][dim];
-    }
 
-    public Board(String str) throws IllegalStateException {
-        if (str.length() != dim * dim) throw new
-                IllegalStateException("Invalid arg in Board constructor");
-        board = new int[dim][dim];
-        int si = 0;
-        for (int i = 0; i < dim; i++)
-            for (int j = 0; j < dim; j++)
-                board[i][j] = Character.getNumericValue(str.charAt(si++));
-    }
+    /*public Board() {
+        board = new int[dim];
+    }*/
 
-    public String matrixToString(){
-        String string = "";
+    public Board(int n) {
+        dim = n;
+        board = new int[dim];
         for (int i = 0; i < dim; i++) {
-            for (int j = 0; j < dim; j++) {
-                string += this.board[i][j];
-            }
+            board[i]= 0; //i -> coluna; board[i] -> linha
         }
-        return string;
     }
+
+
 
     private Board changePosition (int i, int j) {
-        Board nova = new Board(matrixToString());
+        Board nova = new Board(dim);
 
-        int position = nova.board[zeroI+i][zeroJ+j];
-        nova.board[zeroI+i][zeroJ+j] = 0;
-        nova.board[zeroI][zeroJ] = position;
+
         return nova;
     }
 
-    private void findzero () {
-        for (int i = 0; i < dim; i++) {
-            for (int j = 0; j < dim; j++) {
-                if (this.board[i][j] == 0) {
-                    zeroI = i;
-                    zeroJ = j;
-                    return;
-                }
-            }
-        }
+    public int attack(){
+        int result = 0;
+        for(int i = 0; i < dim-1; i++)
+            for(int j = i+1; j < dim; j++)
+                if(i - board[i] == j - board[j] || board[i] == board[j] )result++;
+        return result;
     }
 
     @Override
     public List<Ilayout> children() {
         List<Ilayout> child = new ArrayList<>();
-        findzero();
-
-        if (zeroJ-1 >= 0) {
-            child.add(changePosition(0, -1));
-        }
-        if (zeroI-1 >= 0) {
-            child.add(changePosition( -1, 0));
-        }
-        if (zeroJ+1 < dim) {
-            child.add(changePosition( 0, 1));
-        }
-        if (zeroI+1 < dim) {
-            child.add(changePosition( 1, 0));
-        }
-
 
 
         return child;
     }
 
     @Override
-    public boolean isGoal(Ilayout l) {
-        return equals(l);
+    public boolean isGoal() {
+        return (attack()==0);
     }
 
     @Override
     public double getG() {
         return 1;
     }
-    //... TO BE COMPLETED
 
     public String toString() {
-        String a = "";
+        StringBuilder a = new StringBuilder();
         for (int i = 0; i < dim; i++) {
-            for (int j = 0; j < dim; j++) {
-                if (board[i][j] == 0)
-                    a += " ";
-                else
-                    a+=String.valueOf(board[i][j]);
+            for(int j = 0; j < dim; j++){
+                if(board[j] == i) a.append("1");
+                else a.append("0");
             }
-            a += "\n";
+            a.append("\n");
         }
-        return a;
+        return a.toString();
     }
 
     public boolean equals(Object o) {
         if(o == null) return false;
         if(this.getClass() != o.getClass()) return false;
         for (int i = 0; i < dim; i++) {
-            for (int j = 0; j < dim; j++) {
-                if(this.board[i][j] != ((Board) o).board[i][j]) {
+                if(this.board[i] != ((Board) o).board[i]) {
                     return false;
                 }
-            }
         }
         return true;
     }
@@ -118,7 +81,7 @@ class Board implements Ilayout, Cloneable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + Arrays.deepHashCode(board);
+        //result = prime * result + Arrays.deepHashCode(board);
         return result;
     }
 }

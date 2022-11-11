@@ -5,7 +5,6 @@ public class BestFirst {
     protected Queue<State> abertos;
     private Map<Ilayout, State> fechados;
     private State actual;
-    private Ilayout objective;
 
     static class State {
         private Ilayout layout;
@@ -52,8 +51,7 @@ public class BestFirst {
         return sucs;
     }
 
-    final public Iterator<State> solve(Ilayout s, Ilayout goal) {
-        objective = goal;
+    final public Ilayout solve(Ilayout s) {
         abertos = new PriorityQueue<>(10, (s1, s2) -> (int) Math.signum(s1.getG() - s2.getG()));
 
         fechados = new HashMap<>();
@@ -63,27 +61,15 @@ public class BestFirst {
         while (true) {
             actual = abertos.poll();
             if (actual == null) System.exit(0);
-            if (actual.layout.isGoal(objective)) break;
+            if (actual.layout.isGoal()) return actual.layout;
             fechados.put(actual.layout, actual);
             sucs = sucessores(actual);
 
 
             abertos.addAll(sucs);
 
-            /*for (State st : sucs) {
-                if (!fechados.containsValue(st)) abertos.add(st);
-            }*/
+
         }
 
-        List<State> solution = new ArrayList<>();
-
-        while (actual != null) {
-            solution.add(actual);
-            actual = actual.father;
-        }
-
-        Collections.reverse(solution);
-
-        return solution.iterator();
     }
 }
