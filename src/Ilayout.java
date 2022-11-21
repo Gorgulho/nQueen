@@ -14,4 +14,6 @@ interface Ilayout {
      @return the cost for moving from the input config to the receiver.
      */
     double getG();
+
+    double getH();
 }

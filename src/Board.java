@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 class Board implements Ilayout, Cloneable {
@@ -7,44 +6,64 @@ class Board implements Ilayout, Cloneable {
     private static int dim;
     private int board[];
 
+    public int posAval;
 
-    /*public Board() {
+    public Board() {
         board = new int[dim];
-    }*/
+    }
 
     public Board(int n) {
+        this.posAval = 0;
         dim = n;
-        board = new int[dim];
+        this.board = new int[dim];
         for (int i = 0; i < dim; i++) {
-            board[i]= 0; //i -> coluna; board[i] -> linha
+            //i -> coluna; board[i] -> linha
+            if (i%2 == 0) {
+                this.board[i] = i/2;
+            }
+            else {
+                this.board[i] = n - 1 - i/2;
+            }
         }
     }
 
-
-
-    private Board changePosition (int i, int j) {
-        Board nova = new Board(dim);
-
-
-        return nova;
+    private Board cloneBoard() {
+        Board clone = new Board();
+        if (dim >= 0) System.arraycopy(this.board, 0, clone.board, 0, dim);
+        return clone;
     }
 
+
+    private Ilayout changePostion (int x, int y) {
+        Board novo = cloneBoard();
+        int pos = novo.board[x];
+        novo.board[x] = novo.board[y];
+        novo.board[y] = pos;
+        return novo;
+    }
+
+    //will check how many pieces are attacking and being attacked
     public int attack(){
         int result = 0;
         for(int i = 0; i < dim-1; i++)
             for(int j = i+1; j < dim; j++)
-                if(i - board[i] == j - board[j] || board[i] == board[j] )result++;
+                if(Math.abs(i-j) == Math.abs(board[i]-board[j]) || board[i] == board[j])
+                    result++;
         return result;
     }
 
     @Override
     public List<Ilayout> children() {
         List<Ilayout> child = new ArrayList<>();
-
-
+        for (int i = 0; i < dim-1; i++) {
+            for (int j = i+1; j < dim; j++) {
+                child.add(changePostion(i, j));
+            }
+        }
         return child;
     }
 
+    //pode se mudar para quando tivermos o checkColumn no state, se o checkColumn der return a n, chegamos a resposta
     @Override
     public boolean isGoal() {
         return (attack()==0);
@@ -53,6 +72,11 @@ class Board implements Ilayout, Cloneable {
     @Override
     public double getG() {
         return 1;
+    }
+
+    @Override
+    public double getH() {
+        return attack();
     }
 
     public String toString() {

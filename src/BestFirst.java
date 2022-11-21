@@ -5,11 +5,14 @@ public class BestFirst {
     protected Queue<State> abertos;
     private Map<Ilayout, State> fechados;
     private State actual;
+    private static Ilayout objective;
 
     static class State {
         private Ilayout layout;
         private State father;
         private double g;
+
+        private double h;
 
         public State(Ilayout l, State n) {
             layout = l;
@@ -17,6 +20,8 @@ public class BestFirst {
             if (father != null)
                 g = father.g + l.getG();
             else g = 0.0;
+
+            h = l.getH();
         }
 
         public String toString() {
@@ -27,8 +32,12 @@ public class BestFirst {
             return g;
         }
 
+        public double getH() {
+            return h;
+        }
+
         public int hashCode() {
-            return layout.hashCode();
+            return toString().hashCode();
         }
 
         public boolean equals(Object o) {
@@ -39,37 +48,47 @@ public class BestFirst {
         }
     }
 
-    final private List<State> sucessores(State n) {
-        List<State> sucs = new ArrayList<>();
+    final private State sucessores(State n) {
+        Queue<State> sucs = new PriorityQueue<>(10, (s1, s2) -> (int) Math.signum(s1.getG() + s1.getH() - (s2.getG() + s2.getH())));
         List<Ilayout> children = n.layout.children(); // children will make the children of the board we pass as argument
         for (Ilayout e : children) {
-            if (n.father == null || !e.equals(n.father.layout)) {
+            if ((n.father == null || !e.equals(n.father.layout))) {
                 State nn = new State(e, n);
-                if (!fechados.containsKey(nn.layout)) sucs.add(nn);
+                if (!fechados.containsKey(nn.layout)) {
+                    sucs.add(nn);
+                }
+                else if (((n = fechados.get(nn.layout)) != null) && (n.getG() + n.getH() > nn.getG() + nn.getH())) {
+                    sucs.add(nn);
+                    fechados.replace(n.layout, n, nn);
+                }
             }
         }
-        return sucs;
+        return sucs.poll();
     }
 
-    final public Ilayout solve(Ilayout s) {
-        abertos = new PriorityQueue<>(10, (s1, s2) -> (int) Math.signum(s1.getG() - s2.getG()));
-
+    final public Iterator<State> solve(Ilayout s) {
         fechados = new HashMap<>();
-        abertos.add(new State(s, null));
-        List<State> sucs;
+        actual = new State(s, null);
+        fechados.put(actual.layout, actual);
+        State neighbor;
 
         while (true) {
-            actual = abertos.poll();
             if (actual == null) System.exit(0);
-            if (actual.layout.isGoal()) return actual.layout;
-            fechados.put(actual.layout, actual);
-            sucs = sucessores(actual);
+            neighbor = sucessores(actual);
+            if (neighbor.getH() >= actual.getH()) {
+                break;
+            }
+            actual = neighbor;
+        }
+        List<State> solution = new ArrayList<>();
 
-
-            abertos.addAll(sucs);
-
-
+        while (actual != null) {
+            solution.add(actual);
+            actual = actual.father;
         }
 
+        Collections.reverse(solution);
+
+        return solution.iterator();
     }
 }
