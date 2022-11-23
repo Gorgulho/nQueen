@@ -1,11 +1,9 @@
 import java.util.*;
 
-public class BestFirst {
+public class HillClimbing {
 
-    protected Queue<State> abertos;
     private Map<Ilayout, State> fechados;
     private State actual;
-    private static Ilayout objective;
 
     static class State {
         private Ilayout layout;
