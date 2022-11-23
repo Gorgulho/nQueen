@@ -65,6 +65,7 @@ public class HillClimbing {
     }
 
     final public Iterator<State> solve(Ilayout s) {
+        List<State> solution = new ArrayList<>();
         fechados = new HashMap<>();
         actual = new State(s, null);
         fechados.put(actual.layout, actual);
@@ -73,19 +74,12 @@ public class HillClimbing {
         while (true) {
             if (actual == null) System.exit(0);
             neighbor = sucessores(actual);
+            solution.add(actual);
             if (neighbor.getH() >= actual.getH()) {
                 break;
             }
             actual = neighbor;
         }
-        List<State> solution = new ArrayList<>();
-
-        while (actual != null) {
-            solution.add(actual);
-            actual = actual.father;
-        }
-
-        Collections.reverse(solution);
 
         return solution.iterator();
     }

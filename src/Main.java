@@ -20,7 +20,7 @@ public static void main (String [] args) throws Exception {
     long startTime1 = System.nanoTime();
     Iterator<HillClimbing.State> it = s.solve(b);
     long endTime1 = System.nanoTime();
-    System.out.println((float) (endTime1 - startTime1) / 1000000000 + " Seconds 0.121");
+    System.out.println((float) (endTime1 - startTime1) / 1000000000 + " seconds");
     if (it==null) System.out.println("no solution found");
     else {
         while(it.hasNext()) {

@@ -33,15 +33,6 @@ class Board implements Ilayout, Cloneable {
         return clone;
     }
 
-
-    private Ilayout changePostion (int x, int y) {
-        Board novo = cloneBoard();
-        int pos = novo.board[x];
-        novo.board[x] = novo.board[y];
-        novo.board[y] = pos;
-        return novo;
-    }
-
     //will check how many pieces are attacking and being attacked
     public int attack(){
         int result = 0;
@@ -50,6 +41,14 @@ class Board implements Ilayout, Cloneable {
                 if(Math.abs(i-j) == Math.abs(board[i]-board[j]) || board[i] == board[j])
                     result++;
         return result;
+    }
+
+    private Ilayout changePostion (int x, int y) {
+        Board novo = cloneBoard();
+        int pos = novo.board[x];
+        novo.board[x] = novo.board[y];
+        novo.board[y] = pos;
+        return novo;
     }
 
     @Override
