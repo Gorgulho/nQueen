@@ -3,7 +3,7 @@ import java.util.List;
 
 class Board implements Ilayout, Cloneable {
 
-    private static int dim;
+    private int dim;
     private int board[];
 
     public int posAval;
@@ -106,5 +106,9 @@ class Board implements Ilayout, Cloneable {
         int result = 1;
         //result = prime * result + Arrays.deepHashCode(board);
         return result;
+    }
+
+    public int[] getBoard() {
+        return board;
     }
 }
