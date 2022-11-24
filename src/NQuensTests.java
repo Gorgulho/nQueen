@@ -1,12 +1,45 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class NQuensTests {
+
+    @Test
+    public void testChildren(){
+        Board b1 = new Board(8);
+        List<Ilayout> children1 = b1.children();
+
+        Board b2 = new Board(16);
+        List<Ilayout> children2 = b2.children();
+
+        Board b3 = new Board(32);
+        List<Ilayout> children3 = b3.children();
+
+        Board b4 = new Board(64);
+        List<Ilayout> children4 = b4.children();
+
+        assertEquals(children1.size(), 28);
+        assertEquals(children2.size(), 120);
+        assertEquals(children3.size(), 496);
+        assertEquals(children4.size(), 2016);
+    }
+
+    @Test
+    public void tesAtack() {
+        Board b1 = new Board(16);
+        assertEquals(b1.attack(), 5);
+
+        Board b2 = new Board(32);
+        assertEquals(b2.attack(), 11);
+
+        Board b3 = new Board(64);
+        assertEquals(b3.attack(), 21);
+
+    }
 
     @Test
     public void testConstructor() {
@@ -77,6 +110,16 @@ class NQuensTests {
         Iterator<HillClimbing.State> it16 = alg.solve(new Board(150));
         long endTime16 = System.nanoTime();
 
+        long startTime17 = System.nanoTime();
+        Iterator<HillClimbing.State> it17 = alg.solve(new Board(170));
+        long endTime17 = System.nanoTime();
+        long startTime18 = System.nanoTime();
+        Iterator<HillClimbing.State> it18 = alg.solve(new Board(190));
+        long endTime18 = System.nanoTime();
+        long startTime19 = System.nanoTime();
+        Iterator<HillClimbing.State> it19 = alg.solve(new Board(200));
+        long endTime19 = System.nanoTime();
+
         System.out.println((float) (endTime1 - startTime1) / 1000000000 + " Board 4x4");
         System.out.println((float) (endTime2 - startTime2) / 1000000000 + " Board 10x10");
         System.out.println((float) (endTime3 - startTime3) / 1000000000 + " Board 20x20");
@@ -94,6 +137,9 @@ class NQuensTests {
         System.out.println((float) (endTime14 - startTime14) / 1000000000 + " Board 130x130");
         System.out.println((float) (endTime15 - startTime15) / 1000000000 + " Board 140x140");
         System.out.println((float) (endTime16 - startTime16) / 1000000000 + " Board 150x150");
+        System.out.println((float) (endTime17 - startTime17) / 1000000000 + " Board 170x170");
+        System.out.println((float) (endTime18 - startTime18) / 1000000000 + " Board 190x190");
+        System.out.println((float) (endTime19 - startTime19) / 1000000000 + " Board 200x200");
 
         while (it1.hasNext()) {
             HillClimbing.State i = it1.next();
@@ -213,6 +259,30 @@ class NQuensTests {
         while (it16.hasNext()) {
             HillClimbing.State i = it16.next();
             if (!it16.hasNext()) {
+                System.out.println(i.getG());
+                //assertEquals(46, (int) i.getG());
+            }
+        }
+
+        while (it17.hasNext()) {
+            HillClimbing.State i = it17.next();
+            if (!it17.hasNext()) {
+                System.out.println(i.getG());
+                //assertEquals(46, (int) i.getG());
+            }
+        }
+
+        while (it18.hasNext()) {
+            HillClimbing.State i = it18.next();
+            if (!it18.hasNext()) {
+                System.out.println(i.getG());
+                //assertEquals(46, (int) i.getG());
+            }
+        }
+
+        while (it19.hasNext()) {
+            HillClimbing.State i = it19.next();
+            if (!it19.hasNext()) {
                 System.out.println(i.getG());
                 //assertEquals(46, (int) i.getG());
             }

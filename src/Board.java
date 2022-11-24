@@ -3,7 +3,7 @@ import java.util.List;
 
 class Board implements Ilayout, Cloneable {
 
-    private int dim;
+    private static int dim;
     private int board[];
 
     public int posAval;
