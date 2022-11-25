@@ -27,7 +27,7 @@ public static void main (String [] args) throws Exception {
             HillClimbing.State i = it.next();
             //System.out.println(i.toString());
             //System.out.println(i.getH(b));
-            System.out.println(i.toString());
+            //System.out.println(i.toString());
             if (!it.hasNext()) {
                 System.out.println((int) i.getG());
             }
