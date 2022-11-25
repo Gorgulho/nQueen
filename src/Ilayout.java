@@ -7,7 +7,7 @@ interface Ilayout {
     List<Ilayout> children();
 
     /**
-     @return true if the receiver equals the argument l; return false otherwise.
+     @return true if the receiver's attack number is zero; return false otherwise.
      */
     boolean isGoal();
     /**
@@ -15,5 +15,9 @@ interface Ilayout {
      */
     double getG();
 
+    /**
+     *
+     * @return the receiver's board's number of attacks
+     */
     double getH();
 }
