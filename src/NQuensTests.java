@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class NQuensTests {
 
     @Test
-    public void testChildren(){
+    public void testChildren() {
         Board b1 = new Board(8);
         List<Ilayout> children1 = b1.children();
 
@@ -57,7 +57,7 @@ class NQuensTests {
     }
 
     @Test
-    public void testSomeValues() {
+    public void testSolveAndTimes() {
         HillClimbing alg = new HillClimbing();
         long startTime1 = System.nanoTime();
         Iterator<HillClimbing.State> it1 = alg.solve(new Board(4));
@@ -145,42 +145,42 @@ class NQuensTests {
             HillClimbing.State i = it1.next();
             if (!it1.hasNext()) {
                 System.out.println(i.getG());
-                ///assertEquals(28, (int) i.getG());
+                assertEquals(1, (int) i.getG());
             }
         }
         while (it2.hasNext()) {
             HillClimbing.State i = it2.next();
             if (!it2.hasNext()) {
                 System.out.println(i.getG());
-                //assertEquals(38, (int) i.getG());
+                assertEquals(2, (int) i.getG());
             }
         }
         while (it3.hasNext()) {
             HillClimbing.State i = it3.next();
             if (!it3.hasNext()) {
                 System.out.println(i.getG());
-                //(45, (int) i.getG());
+                assertEquals(3, (int) i.getG());
             }
         }
         while (it4.hasNext()) {
             HillClimbing.State i = it4.next();
             if (!it4.hasNext()) {
                 System.out.println(i.getG());
-                //assertEquals(45, (int) i.getG());
+                assertEquals(5, (int) i.getG());
             }
         }
         while (it5.hasNext()) {
             HillClimbing.State i = it5.next();
             if (!it5.hasNext()) {
                 System.out.println(i.getG());
-                //assertEquals(46, (int) i.getG());
+                assertEquals(8, (int) i.getG());
             }
         }
         while (it6.hasNext()) {
             HillClimbing.State i = it6.next();
             if (!it6.hasNext()) {
                 System.out.println(i.getG());
-                //assertEquals(46, (int) i.getG());
+                assertEquals(9, (int) i.getG());
             }
         }
 
@@ -188,7 +188,7 @@ class NQuensTests {
             HillClimbing.State i = it7.next();
             if (!it7.hasNext()) {
                 System.out.println(i.getG());
-                //assertEquals(46, (int) i.getG());
+                assertEquals(10, (int) i.getG());
             }
         }
 
@@ -196,7 +196,7 @@ class NQuensTests {
             HillClimbing.State i = it8.next();
             if (!it8.hasNext()) {
                 System.out.println(i.getG());
-                //assertEquals(46, (int) i.getG());
+                assertEquals(13, (int) i.getG());
             }
         }
 
@@ -204,7 +204,7 @@ class NQuensTests {
             HillClimbing.State i = it9.next();
             if (!it9.hasNext()) {
                 System.out.println(i.getG());
-                //assertEquals(46, (int) i.getG());
+                assertEquals(16, (int) i.getG());
             }
         }
 
@@ -212,7 +212,7 @@ class NQuensTests {
             HillClimbing.State i = it10.next();
             if (!it10.hasNext()) {
                 System.out.println(i.getG());
-                //assertEquals(46, (int) i.getG());
+                assertEquals(18, (int) i.getG());
             }
         }
 
@@ -220,7 +220,7 @@ class NQuensTests {
             HillClimbing.State i = it11.next();
             if (!it11.hasNext()) {
                 System.out.println(i.getG());
-                //assertEquals(46, (int) i.getG());
+                assertEquals(20, (int) i.getG());
             }
         }
 
@@ -228,7 +228,7 @@ class NQuensTests {
             HillClimbing.State i = it12.next();
             if (!it12.hasNext()) {
                 System.out.println(i.getG());
-                //assertEquals(46, (int) i.getG());
+                assertEquals(22, (int) i.getG());
             }
         }
 
@@ -236,7 +236,7 @@ class NQuensTests {
             HillClimbing.State i = it13.next();
             if (!it13.hasNext()) {
                 System.out.println(i.getG());
-                //assertEquals(46, (int) i.getG());
+                assertEquals(21, (int) i.getG());
             }
         }
 
@@ -244,7 +244,7 @@ class NQuensTests {
             HillClimbing.State i = it14.next();
             if (!it14.hasNext()) {
                 System.out.println(i.getG());
-                //assertEquals(46, (int) i.getG());
+                assertEquals(24, (int) i.getG());
             }
         }
 
@@ -252,7 +252,7 @@ class NQuensTests {
             HillClimbing.State i = it15.next();
             if (!it15.hasNext()) {
                 System.out.println(i.getG());
-                //assertEquals(46, (int) i.getG());
+                assertEquals(28, (int) i.getG());
             }
         }
 
@@ -260,7 +260,7 @@ class NQuensTests {
             HillClimbing.State i = it16.next();
             if (!it16.hasNext()) {
                 System.out.println(i.getG());
-                //assertEquals(46, (int) i.getG());
+                assertEquals(28, (int) i.getG());
             }
         }
 
@@ -268,7 +268,7 @@ class NQuensTests {
             HillClimbing.State i = it17.next();
             if (!it17.hasNext()) {
                 System.out.println(i.getG());
-                //assertEquals(46, (int) i.getG());
+                assertEquals(33, (int) i.getG());
             }
         }
 
@@ -276,7 +276,7 @@ class NQuensTests {
             HillClimbing.State i = it18.next();
             if (!it18.hasNext()) {
                 System.out.println(i.getG());
-                //assertEquals(46, (int) i.getG());
+                assertEquals(37, (int) i.getG());
             }
         }
 
@@ -284,7 +284,7 @@ class NQuensTests {
             HillClimbing.State i = it19.next();
             if (!it19.hasNext()) {
                 System.out.println(i.getG());
-                //assertEquals(46, (int) i.getG());
+                assertEquals(40, (int) i.getG());
             }
         }
 
