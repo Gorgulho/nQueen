@@ -35,14 +35,14 @@ public class HillClimbing {
         }
 
         /**
-         * @return Gets the G value calculated in the constructor
+         * @return the G value calculated in the constructor
          */
         public double getG() {
             return g;
         }
 
         /**
-         * @return Gets the H value calculated in the constructor
+         * @return the H value calculated in the constructor
          */
         public double getH() {
             return h;
