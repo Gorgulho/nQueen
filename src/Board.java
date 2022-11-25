@@ -33,7 +33,7 @@ class Board implements Ilayout, Cloneable {
     }
 
     /**
-     *clones the receiver
+     * clones the receiver
      * @return object of type Board
      */
     private Board cloneBoard() {
@@ -56,10 +56,9 @@ class Board implements Ilayout, Cloneable {
     }
 
     /**
-     *
      * @param x line passed from method children()
      * @param y column passed from method children()
-     * @return list of successors,
+     * @return clone of the object
      */
     private Ilayout changePostion (int x, int y) {
         Board novo = cloneBoard();
@@ -70,6 +69,7 @@ class Board implements Ilayout, Cloneable {
     }
 
     /**
+     * switches columns, therefore switches also the queen's positions
      * @inhertDoc
      */
     @Override

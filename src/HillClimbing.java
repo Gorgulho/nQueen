@@ -13,9 +13,9 @@ public class HillClimbing {
         private double h;
 
         /**
-         * State constructor, it takes an Ilayout object and State obeject (father).
-         * @param l - Ilayout object to be stored in this State
-         * @param n - father of the board represented by parameter l
+         * State constructor, it takes an Ilayout object and State object (father).
+         * @param l Ilayout object to be stored in this State
+         * @param n father of the board represented by parameter l
          */
         public State(Ilayout l, State n) {
             layout = l;
@@ -28,37 +28,37 @@ public class HillClimbing {
         }
 
         /**
-         * @return - A string representing the object
+         * @return a string representation of the object
          */
         public String toString() {
             return layout.toString();
         }
 
         /**
-         * @return - Gets the G value calculated in the constructor
+         * @return Gets the G value calculated in the constructor
          */
         public double getG() {
             return g;
         }
 
         /**
-         * @return - Gets the H value calculated in the constructor
+         * @return Gets the H value calculated in the constructor
          */
         public double getH() {
             return h;
         }
 
         /**
-         * @return
+         * @return a hash code value for this object
          */
         public int hashCode() {
             return toString().hashCode();
         }
 
         /**
-         * Indicates whether some other object is "equal to" this one.
-         * @param o – the reference object with which to compare.
-         * @return - true if this object is the same as the o argument; false otherwise.
+         * Indicates whether some other object is "equal to" this one
+         * @param o the reference object with which to compare
+         * @return true if this object is the same as the o argument; false otherwise
          */
         public boolean equals(Object o) {
             if (o == null) return false;
@@ -69,10 +69,10 @@ public class HillClimbing {
     }
 
     /**
-     * Thaking the State n passed as argument, it generates all the possible childes and keeps only the most promissing one (Hill Climbing algorithm),
-     * the one that has the least amount of attacks in comparation with the father State
-     * @param n - State from which will be generated their successors
-     * @return - State that contains the least amount of attacks comparing with the father
+     * Taking the State n passed as argument, it generates all the possible children and keeps only the most promising one (Hill Climbing algorithm),
+     * the one that has the least amount of attacks in comparison with the father State
+     * @param n State from which will be generated its successors
+     * @return State that contains the least amount of attacks comparing with the father
      */
     final private State sucessores(State n) {
         Queue<State> sucs = new PriorityQueue<>(10, (s1, s2) -> (int) Math.signum(s1.getG() + s1.getH() - (s2.getG() + s2.getH())));
@@ -93,9 +93,9 @@ public class HillClimbing {
     }
 
     /**
-     * Thakes the intial Ilayout object (Board) and resolves the puzzle using the Hill Climbing algorithm
-     * @param s - Initial Ilayout object (Board), from with the method will start resolving the puzzle
-     * @return - Iterator that contains all the States needed until the final one with the result
+     * Takes the initial Ilayout object (Board) and solves the puzzle using the Hill Climbing algorithm
+     * @param s Initial Ilayout object (Board), from which the method will start solving the puzzle
+     * @return Iterator that contains all the States needed until the final one with the result
      */
     final public Iterator<State> solve(Ilayout s) {
         List<State> solution = new ArrayList<>();
