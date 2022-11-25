@@ -5,7 +5,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class NQuensTests {
+class NQueensTests {
 
     @Test
     public void testChildren() {
@@ -28,7 +28,7 @@ class NQuensTests {
     }
 
     @Test
-    public void tesAtack() {
+    public void testAttack() {
         Board b1 = new Board(16);
         assertEquals(b1.attack(), 5);
 
